@@ -60,4 +60,6 @@ http://ionicframework.com/docs/theming/ */
     
     --ion-background-color: var(--ion-color-light);
     --ion-text-color: var(--ion-color-primary);
+    --primary-color: var(--ion-color-primary);
+    --primary-color-text: var(--ion-color-light);
 }

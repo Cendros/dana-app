@@ -1,0 +1,20 @@
+.center-x {
+    left: 50%;
+}
+
+.translate-50 {
+    transform: translate(-50%, -50%);
+}
+
+.bg-secondary {
+    background: var(--ion-color-secondary);
+}
+
+.text-medium {
+    color: var(--ion-color-medium);
+}
+
+.divider {
+    width: 100vw;
+    height: 3px;
+}
