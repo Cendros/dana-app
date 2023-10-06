@@ -3,4 +3,5 @@ export type CheckType = {
     structureName: string
     quantity: number
     value: number
+    image: string
 }
