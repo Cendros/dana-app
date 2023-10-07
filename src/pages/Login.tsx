@@ -1,6 +1,6 @@
 import { IonButton, IonContent, IonPage } from '@ionic/react';
 import { useAtom } from 'jotai/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { tokenAtom } from '../atoms/globalStorage';
 
 const Login: React.FC = () => {

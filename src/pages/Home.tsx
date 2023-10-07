@@ -1,26 +1,20 @@
 import React from 'react';
-import { IonButton, IonContent, IonPage } from '@ionic/react';
-import { useAtom, useAtomValue } from 'jotai/react';
-import { tokenAtom } from '../atoms/globalStorage';
-import { checksAtom, soldeAtom } from '../atoms/check';
+import { IonContent, IonPage } from '@ionic/react';
+import { useAtomValue } from 'jotai/react';
+import { checksAtom } from '../atoms/check';
 import useChecks from '../hooks/useChecks';
 import Solde from '../components/Check/Solde';
 import Check from '../components/Check/Check';
+import Header from '../components/Header';
 
 const Home: React.FC = () => {
-    const [, setToken] = useAtom(tokenAtom);
     const checks = useAtomValue(checksAtom);
-    const refresh = useChecks();
-
-    const logout = () => {
-        setToken(undefined);
-        location.href = '/login';
-    }
+    useChecks();
 
     return (
-        <IonPage className='ion-padding'>
-            <IonContent fullscreen class='bg-light'>
-                <IonButton onClick={logout}>Logout</IonButton>
+        <IonPage>
+            <Header />
+            <IonContent fullscreen className='bg-light ion-padding'>
                 <div className='flex flex-column align-items-center'>
                     <Solde />
 

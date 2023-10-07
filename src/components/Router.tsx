@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from "@ionic/react"
 import { Redirect, Route } from "react-router"
 import { IonReactRouter } from '@ionic/react-router';
@@ -10,8 +10,7 @@ import { useAtomValue } from "jotai/react";
 import { tokenAtom } from "../atoms/globalStorage";
 import Login from "../pages/Login";
 
-
-const Router = () => {
+const Router: React.FC = () => {
     const token = useAtomValue(tokenAtom);
 
     return (
@@ -19,18 +18,10 @@ const Router = () => {
             { token ?
                 <IonTabs>
                     <IonRouterOutlet>
-                    <Route exact path="/home">
-                        <Home />
-                    </Route>
-                    <Route exact path="/qrcode">
-                        <QrCode />
-                    </Route>
-                    <Route path="/map">
-                        <Map />
-                    </Route>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
+                    <Route exact path="/home" render={() => <Home />} />
+                    <Route exact path="/qrcode" render={() => <QrCode />} />
+                    <Route exact path="/map" render={() => <Map />} />
+                    <Route exact path="/login" render={() => <Login />} />
                     <Route exact path="/">
                         <Redirect to={token ? "/home" : "/login"} />
                     </Route>
