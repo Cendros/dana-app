@@ -10,6 +10,11 @@
     color: var(--ion-color-medium);
 }
 
+.text-initial {
+    text-transform: initial;
+    letter-spacing: normal;
+}
+
 .divider {
     width: 100vw;
     height: 3px;

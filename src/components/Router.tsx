@@ -21,7 +21,6 @@ const Router: React.FC = () => {
                     <Route exact path="/home" render={() => <Home />} />
                     <Route exact path="/qrcode" render={() => <QrCode />} />
                     <Route exact path="/map" render={() => <Map />} />
-                    <Route exact path="/login" render={() => <Login />} />
                     <Route exact path="/">
                         <Redirect to={token ? "/home" : "/login"} />
                     </Route>

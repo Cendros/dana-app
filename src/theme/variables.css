@@ -62,4 +62,6 @@ http://ionicframework.com/docs/theming/ */
     --ion-text-color: var(--ion-color-primary);
     --primary-color: var(--ion-color-primary);
     --primary-color-text: var(--ion-color-light);
+
+    --apollo-border-radius: 16px;
 }
