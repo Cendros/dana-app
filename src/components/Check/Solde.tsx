@@ -1,8 +1,8 @@
-import { useAtomValue } from 'jotai/react';
 import React from 'react'
+import { useAtomValue } from 'jotai/react';
 import { soldeAtom } from '../../atoms/check';
 
-const Solde = () => {
+const Solde: React.FC = () => {
     const solde = useAtomValue(soldeAtom);
 
     return (

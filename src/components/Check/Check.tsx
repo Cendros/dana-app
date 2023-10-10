@@ -1,16 +1,16 @@
 import React from 'react'
 import { CheckType } from '../../types/check'
 import { IonImg } from '@ionic/react'
-import { apiUrl } from '../../consts/api'
+import { API_URL } from '../../consts/api'
 
 type CheckProps = {
     check: CheckType
 }
 
-const Check = ({ check }: CheckProps) => {
+const Check: React.FC<CheckProps> = ({ check }) => {
     return (
         <div className='bg-primary w-full my-2 border-round-3xl relative overflow-hidden'>
-            <IonImg src={`${apiUrl}${check.image}`} className={`absolute top-50 left-50 translate-50 img-cover w-full h-full low-brightness ${check.quantity === 0 ? 'filter-gray' : null}`} />
+            <IonImg src={`${API_URL}${check.image}`} className={`absolute top-50 left-50 translate-50 img-cover w-full h-full low-brightness ${check.quantity === 0 ? 'filter-gray' : null}`} />
             <div className='flex flex-column justify-content-between align-items-start gap-5 z-1 p-3 relative'>
                 <div className='flex flex-row justify-content-between gap-4 w-full'>
                     <h2 className='m-0 font-bold'>{check.structureName}</h2>

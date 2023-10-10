@@ -4,8 +4,7 @@ import App from './App';
 
 window.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('root');
-    if (!container)
-    return;
+    if (!container) return;
     
     const root = createRoot(container);
     

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonToolbar } from '@ionic/react';
 import { arrowBack } from 'ionicons/icons';
 import { useAtom } from 'jotai/react';
@@ -9,12 +9,17 @@ type ProfileProps = {
 }
 
 const Profile: React.FC<ProfileProps> = ({ dismiss }) => {
-    const [, setToken] = useAtom(tokenAtom);
+    const [token, setToken] = useAtom(tokenAtom);
 
     const logout = () => {
         setToken(undefined);
         location.href = '/login';
     }
+
+    //? DEV
+    useEffect(() => {
+        console.log(token);
+    }, []);
 
     return (
         <IonPage>

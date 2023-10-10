@@ -1,16 +1,14 @@
-import { apiUrl } from "../consts/api"
+import { request } from "../utils/request";
 
 export const authUser = async (email: string, password: string) => {
-    const res = await fetch(`${apiUrl}/auth/login/`, {
+    const body = {
+        email: email,
+        password: password
+    }
+    
+    return await request({
+        route: '/auth/login/',
         method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
+        body: body
     });
-    return await res.json();
 }
