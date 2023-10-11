@@ -3,9 +3,9 @@ import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } 
 import { Redirect, Route } from "react-router"
 import { IonReactRouter } from '@ionic/react-router';
 import Home from "../pages/Home";
-import QrCode from "../pages/QrCode";
+import Barcode from "../pages/Barcode";
 import Map from "../pages/Map";
-import { homeOutline, mapOutline, qrCodeOutline } from 'ionicons/icons';
+import { barcodeOutline, homeOutline, mapOutline } from 'ionicons/icons';
 import { useAtomValue } from "jotai/react";
 import { tokenAtom } from "../atoms/globalStorage";
 import Login from "../pages/Login";
@@ -19,7 +19,7 @@ const Router: React.FC = () => {
                 <IonTabs>
                     <IonRouterOutlet>
                     <Route exact path="/home" render={() => <Home />} />
-                    <Route exact path="/qrcode" render={() => <QrCode />} />
+                    <Route exact path="/barcode" render={() => <Barcode />} />
                     <Route exact path="/map" render={() => <Map />} />
                     <Route exact path="/">
                         <Redirect to={token ? "/home" : "/login"} />
@@ -30,8 +30,8 @@ const Router: React.FC = () => {
                             <IonIcon aria-hidden="true" icon={homeOutline} />
                             <IonLabel>Accueil</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="qrcode" href="/qrcode">
-                            <IonIcon aria-hidden="true" icon={qrCodeOutline} />
+                        <IonTabButton tab="barcode" href="/barcode">
+                            <IonIcon aria-hidden="true" icon={barcodeOutline} />
                         </IonTabButton>
                         <IonTabButton tab="map" href="/map">
                             <IonIcon aria-hidden="true" icon={mapOutline} />
