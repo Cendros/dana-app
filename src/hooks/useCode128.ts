@@ -22,7 +22,7 @@ const useCode128 = () => {
         setCode128(code);
     }
 
-    return { code128: code128 ? code128 : storedCode128, isStored: !code128 };
+    return { code128: code128 ? code128 : storedCode128, isStored: !code128 && storedCode128 };
 }
 
 export default useCode128;
