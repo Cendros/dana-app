@@ -31,3 +31,7 @@
 .filter-gray {
     filter: grayscale(1) brightness(50%);
 }
+
+.border-warning {
+    border-color: var(--ion-color-warning);
+}
