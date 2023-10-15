@@ -15,21 +15,20 @@ const Home: React.FC = () => {
             <Header />
             <IonContent fullscreen className='bg-light ion-padding'>
                 <div className='flex flex-column align-items-center h-full'>
-                    { isStored ?
+                    { checks && isStored ?
                         <div className='border-2 border-warning border-round-xl flex align-items-center gap-2 p-3 mb-3'>
                             <IonIcon icon={warning} color='warning' size='large' className='w-4' />
                             <IonText color='warning'>Aucune connexion, connectez vous à internet pour récupérer vos chèques.</IonText>
                         </div>
                     : null }
 
-                    <Solde />
-
                     { checks ?
                         <>
+                            <Solde />
                             <h2 className='align-self-start font-bold'>Vos chèques Apollo</h2>
                             { checks.length ?
                                 checks.map((check, i) => (
-                                    <Check key={i} check={check} /> 
+                                    <Check key={i} check={check} noConnection={isStored} /> 
                                 ))
                             :
                                 <>

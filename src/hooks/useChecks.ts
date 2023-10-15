@@ -1,15 +1,21 @@
 import { useAtom, useAtomValue } from "jotai/react";
 import { checksAtom, soldeAtom } from "../atoms/check";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getChecks } from "../services/check";
 import { storedChecksAtom, tokenAtom } from "../atoms/globalStorage";
 import { CheckType } from "../types/check";
 
-const useChecks = () => {
+type ChecksHook = {
+    checks: Array<CheckType> | undefined
+    isStored: boolean
+}
+
+const useChecks = (): ChecksHook => {
     const [checks, setChecks] = useAtom(checksAtom);
     const [solde, setSolde] = useAtom(soldeAtom);
     const token = useAtomValue(tokenAtom);
     const [storedChecks, setStoredChecks] = useAtom(storedChecksAtom);
+    const [isConnection, setIsConnection] = useState<boolean>(true);
 
     useEffect(() => {
         if (!checks)
@@ -17,26 +23,28 @@ const useChecks = () => {
     }, [])
 
     useEffect(() => {
-        if (checks) {
+        if (checks)
             setSolde(checks.reduce((accu: number, item: CheckType) => accu += item.value * item.quantity, 0));
-            return;
-        }
+    }, [checks]);
 
-        if (storedChecks && !solde)
+    useEffect(() => {
+        if (!isConnection && storedChecks) {
+            setChecks(storedChecks)
             setSolde(storedChecks.reduce((accu: number, item: CheckType) => accu += item.value * item.quantity, 0));
-    }, [checks, storedChecks]);
-
-    const fetchChecks = async () => {        
-        const { checks } = await getChecks(token);
-
-        if (checks) {
-            setStoredChecks(checks)
         }
+    }, [isConnection, storedChecks]);
 
-        setChecks(checks);
+    const fetchChecks = async () => {
+        const { checks } = await getChecks(token);
+        
+        if (checks) {
+            setStoredChecks(checks);
+            setIsConnection(true);
+            setChecks(checks);
+        } else setIsConnection(false);
     }
 
-    return {checks: checks ? checks : storedChecks, isStored: !checks && storedChecks};
+    return {checks: checks, isStored: !isConnection};
 }
 
 export default useChecks;
