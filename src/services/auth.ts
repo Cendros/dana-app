@@ -7,7 +7,7 @@ export const authUser = async (email: string, password: string) => {
     }
     
     return await request({
-        route: '/auth/login/',
+        route: '/login',
         method: 'POST',
         body: body
     });

@@ -39,7 +39,7 @@ const Login: React.FC = () => {
     return (
         <IonPage>
             <IonContent className="ion-padding">
-                <h1>Apollo</h1>
+                <h1>dana</h1>
 
                 <h2 className='font-bold p-4 text-center text-5xl'>Connexion à votre compte</h2>
                 <div className='flex flex-column gap-5 px-3'>

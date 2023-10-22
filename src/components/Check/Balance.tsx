@@ -1,16 +1,17 @@
 import React from 'react'
 import { useAtomValue } from 'jotai/react';
-import { soldeAtom } from '../../atoms/check';
+import { balanceAtom } from '../../atoms/check';
+import useBalance from '../../hooks/useBalance';
 
-const Solde: React.FC = () => {
-    const solde = useAtomValue(soldeAtom);
+const Balance: React.FC = () => {
+    const balance = useBalance();
 
     return (
         <>
-            { solde ? 
+            { balance ? 
                 <div className='bg-primary flex flex-row justify-content-between align-items-center w-9 p-3 border-round-xl relative overflow-hidden'>
                     <h2 className='m-0 font-bold'>Solde</h2>
-                    <h2 className='m-0 font-bold'>{solde} €</h2>
+                    <h2 className='m-0 font-bold'>{balance} €</h2>
                     <div className='bg-secondary border-circle p-5 absolute top-0 left-50 translate-50'></div>
                 </div>
             : null }
@@ -18,4 +19,4 @@ const Solde: React.FC = () => {
     )
 }
 
-export default Solde;
+export default Balance;

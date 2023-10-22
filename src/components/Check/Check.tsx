@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { CheckType } from '../../types/check'
 import { IonImg } from '@ionic/react'
 import { API_URL } from '../../consts/api'

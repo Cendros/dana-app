@@ -20,13 +20,14 @@ export const request = async ({ route, method, body, token }: RequestParams) => 
         },
         ...body && { body: JSON.stringify(body) }
     };
+    console.log(`${API_URL}${route}`);
     
     try {
         const res = await fetch(`${API_URL}${route}`, options);
-        console.log(res);
         
         return await res.json();
     } catch (err) {
+        
         return { error: true }
     }
 }

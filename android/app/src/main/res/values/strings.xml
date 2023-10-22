@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Apollo</string>
-    <string name="title_activity_main">Apollo</string>
-    <string name="package_name">com.apollo.check</string>
-    <string name="custom_url_scheme">com.apollo.check</string>
+    <string name="app_name">dana</string>
+    <string name="title_activity_main">dana</string>
+    <string name="package_name">com.dana.check</string>
+    <string name="custom_url_scheme">com.dana.check</string>
 </resources>

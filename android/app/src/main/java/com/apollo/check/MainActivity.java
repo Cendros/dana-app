@@ -1,4 +1,4 @@
-package com.apollo.check;
+package com.dana.check;
 
 import com.getcapacitor.BridgeActivity;
 

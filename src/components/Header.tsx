@@ -18,7 +18,7 @@ const Header: React.FC = () => {
     return (
         <IonHeader translucent className='ion-no-border ion-padding'>
             <IonToolbar>
-                <IonTitle>Apollo</IonTitle>
+                <IonTitle>dana</IonTitle>
                 <IonButtons slot='end'>
                     <IonButton onClick={() => presentProfile()}>
                         <IonIcon icon={personOutline} size='large'/>
