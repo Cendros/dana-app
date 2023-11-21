@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonToolbar } from '@ionic/react';
 import { arrowBack } from 'ionicons/icons';
 import { useAtom } from 'jotai/react';
-import { code128Atom, storedChecksAtom, tokenAtom } from '../atoms/globalStorage';
+import { tokenAtom } from '../atoms/globalStorage';
 
 type ProfileProps = {
     dismiss: () => void;
@@ -10,13 +10,9 @@ type ProfileProps = {
 
 const Profile: React.FC<ProfileProps> = ({ dismiss }) => {
     const [token, setToken] = useAtom(tokenAtom);
-    const [, setCode128] = useAtom(code128Atom);
-    const [, setStoredChecks] = useAtom(storedChecksAtom); 
 
     const logout = () => {
         setToken(undefined);
-        setCode128(undefined);
-        setStoredChecks(undefined);
         location.href = '/login';
     }
 

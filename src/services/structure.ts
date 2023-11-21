@@ -1,9 +1,9 @@
 import { MethodType } from "../consts/api";
 import { RequestParams, request } from "../utils/request";
 
-export const getBalance = async (token: RequestParams['token']) => {
+export const getMyStructures = async (token: RequestParams['token']) => {
     return await request({
-        route: '/user/balance',
+        route: '/structure/my',
         method: MethodType.GET,
         token: token
     });

@@ -35,3 +35,12 @@
 .border-warning {
     border-color: var(--ion-color-warning);
 }
+
+.aspect-1 {
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.translate-50 {
+    transform: translate(-50%, -50%);
+}

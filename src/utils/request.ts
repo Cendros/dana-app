@@ -1,7 +1,4 @@
-import { API_URL } from "../consts/api";
-
-const methods = ['GET', 'POST', 'PUT', 'DELETE'] as const;
-type MethodType = typeof methods[number];
+import { API_URL, MethodType } from "../consts/api";
 
 export type RequestParams = {
     route: string
@@ -20,7 +17,6 @@ export const request = async ({ route, method, body, token }: RequestParams) => 
         },
         ...body && { body: JSON.stringify(body) }
     };
-    console.log(`${API_URL}${route}`);
     
     try {
         const res = await fetch(`${API_URL}${route}`, options);
