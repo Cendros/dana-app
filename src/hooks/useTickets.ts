@@ -8,6 +8,7 @@ const useTickets = () => {
     const [tickets, setTickets] = useAtom(ticketsAtom);
 
     useEffect(() => {
+        console.log('fetch');
         fetchTickets();
     }, []);
 

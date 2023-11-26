@@ -15,7 +15,6 @@ import { ticketsAtom, tokenAtom } from '../../../atoms/globalStorage';
 import { balanceAtom } from '../../../atoms/user';
 import QrCode from '../../QrCode';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import { Swiper as SwiperType } from 'swiper/types';
 
 const Details: React.FC<modalProps> = ({ dismiss }) => {
@@ -84,7 +83,6 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
                                 <Swiper
                                     loop
                                     pagination
-                                    modules={[Pagination]}
                                     className='h-full'
                                     onInit={(ev: SwiperType) => {
                                         setSwiper(ev);
