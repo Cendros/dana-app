@@ -3,11 +3,11 @@ import { IonContent, IonPage } from '@ionic/react';
 import Solde from '../components/Check/Balance';
 import Header from '../components/Header';
 import NextEvents from '../components/Home/NextEvents';
+import Structures from '../components/Home/Structures';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import '@ionic/react/css/ionic-swiper.css';
-import Structures from '../components/Home/Structures';
 
 const Home: React.FC = () => {
     return (

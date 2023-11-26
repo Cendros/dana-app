@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai/react";
-import { balanceAtom } from "../atoms/check";
+import { balanceAtom } from "../atoms/user";
 import { useEffect } from "react";
 import { getBalance } from "../services/user";
 import { tokenAtom } from "../atoms/globalStorage";

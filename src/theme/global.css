@@ -28,6 +28,15 @@
     filter: brightness(50%);
 }
 
+.black-gradient-bottom {
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+
+    &::part(image) {
+        z-index: -1;
+        position: relative;
+    }
+}
+
 .filter-gray {
     filter: grayscale(1) brightness(50%);
 }
@@ -43,4 +52,10 @@
 
 .translate-50 {
     transform: translate(-50%, -50%);
+}
+
+.center-x {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }

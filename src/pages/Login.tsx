@@ -3,6 +3,7 @@ import { useAtom } from 'jotai/react';
 import React, { useState } from 'react';
 import { tokenAtom } from '../atoms/globalStorage';
 import { authUser } from '../services/auth';
+import Header from '../components/Header';
 
 const Login: React.FC = () => {
     const [, setToken] = useAtom(tokenAtom);
@@ -38,9 +39,8 @@ const Login: React.FC = () => {
 
     return (
         <IonPage>
+            <Header />
             <IonContent className="ion-padding">
-                <h1>dana</h1>
-
                 <h2 className='font-bold p-4 text-center text-5xl'>Connexion à votre compte</h2>
                 <div className='flex flex-column gap-5 px-3'>
                     { error ? <IonText color='danger' className='text-center'>{error}</IonText> : null }

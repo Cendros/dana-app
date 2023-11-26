@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAtomValue } from 'jotai/react';
-import { balanceAtom } from '../../atoms/check';
+import { balanceAtom } from '../../atoms/user';
 import useBalance from '../../hooks/useBalance';
 
 const Balance: React.FC = () => {

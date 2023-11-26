@@ -3,7 +3,6 @@ import Loading from '../Loading';
 import useStructures from '../../hooks/useStructures';
 import Structure from '../Check/Structure/Structure';
 import { StructureMinType } from '../../types/structure';
-import { IonGrid } from '@ionic/react';
 
 const Structures: React.FC = () => {
     const structures = useStructures();
