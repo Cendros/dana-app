@@ -1,14 +1,31 @@
 import React from 'react'
-import { IonImg } from '@ionic/react'
+import { IonImg, useIonModal } from '@ionic/react'
 import { StructureMinType } from '../../../types/structure'
+import useStructure from '../../../hooks/useStructure'
+import Details from './Details'
 
 type StructureProps = {
     structure: StructureMinType['structure']
 }
 
 const Structure: React.FC<StructureProps> = ({ structure }) => {
+    const { setStructure } = useStructure();
+
+    const DetailsModal = ({ onDismiss }: { onDismiss: () => void }) => (
+        <Details dismiss={onDismiss} />
+    )
+
+    const [presentModal, dismissModal] = useIonModal(DetailsModal, {
+        onDismiss: () => dismissModal()
+    })
+
+    const onClick = () => {
+        setStructure(structure.id);
+        presentModal();
+    }
+
     return (
-        <div className='w-full p-2 my-2 relative overflow-hidden'>
+        <div className='w-full p-2 my-2 relative overflow-hidden' onClick={onClick}>
             <div className='flex align-items-center justify-content-center relative border-round-2xl overflow-hidden aspect-1'>
                 <IonImg src={structure.image} className='w-full h-full img-cover' />
             </div>

@@ -13,9 +13,6 @@ type TicketProps = {
 }
 
 const Ticket: React.FC<TicketProps> = ({ ticket }) => {
-    console.log(ticket);
-    
-
     const [, setSelectedEvent] = useAtom(selectedEventAtom);
 
     const DetailsModal = ({ onDismiss }: { onDismiss: () => void }) => (
