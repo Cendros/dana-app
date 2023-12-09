@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IonIcon, IonImg, useIonModal } from '@ionic/react'
 import { ASSETS_URL } from '../../../consts/api'
 import { EventType } from '../../../types/event'
@@ -13,14 +13,17 @@ type TicketProps = {
 }
 
 const Ticket: React.FC<TicketProps> = ({ ticket }) => {
+    const [showQr, setShowQr] = useState<boolean>(false);
     const [, setSelectedEvent] = useAtom(selectedEventAtom);
 
     const DetailsModal = ({ onDismiss }: { onDismiss: () => void }) => (
-        <Details dismiss={onDismiss} />
+        <Details dismiss={onDismiss} showQr={showQr} />
     )
 
     const [presentModal, dismissModal] = useIonModal(DetailsModal, {
-        onDismiss: () => dismissModal()
+        onDismiss: () => {
+            dismissModal();
+        }
     })
 
     const onClick = (event: EventType) => {
@@ -38,7 +41,7 @@ const Ticket: React.FC<TicketProps> = ({ ticket }) => {
                         <span className='text-sm'>{ticket.structureName}</span>
                     </div>
                     <div className='flex flex-column justify-content-between align-items-end'>
-                        <IonIcon icon={qrCode} />
+                        <IonIcon icon={qrCode} onClick={() => setShowQr(true)} />
                         <div className='flex flex-column gap-2'>
                             <span className='text-sm'>{formatDateTicket(ticket.date)}</span>
                             <span className='text-sm'>{formatHourTicket(ticket.date)}</span>

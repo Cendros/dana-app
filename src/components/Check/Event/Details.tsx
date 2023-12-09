@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { modalProps } from '../../../types/components';
 import { IonButton, IonContent, IonIcon, IonImg, IonPage, useIonAlert } from '@ionic/react';
 import { arrowBack, qrCode } from 'ionicons/icons';
@@ -17,7 +17,11 @@ import QrCode from '../../QrCode';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper/types';
 
-const Details: React.FC<modalProps> = ({ dismiss }) => {
+type DetailsProps = {
+    showQr?: boolean
+}
+
+const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
     const [open, setOpen] = useState<boolean>(false);
 
     const [swiper, setSwiper] = useState<SwiperType | undefined>(undefined);
@@ -30,6 +34,11 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
     const [tickets, setTickets] = useAtom(ticketsAtom);
 
     const [presentAlert] = useIonAlert();
+
+    useEffect(() => {
+        if (showQr && swiper && !swiper.destroyed)
+            swiper.slideNext();
+    }, [swiper]);
 
     const left = (
         <IonButton fill='clear' onClick={dismiss}>
@@ -66,7 +75,9 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
         dismiss();
     }
 
-    const showQr = () => {
+    const slideToQr = () => {
+        console.log(swiper);
+        
         if (swiper)
             swiper.slideNext();
     }
@@ -90,7 +101,7 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
                                 >
                                     <SwiperSlide>
                                         <IonImg src={`${ASSETS_URL}/events/${event.image}`} className='absolute' />
-                                        <IonIcon icon={qrCode} className='absolute top-0 right-0 p-3 bg-primary border-round-xl' onClick={showQr}/>
+                                        <IonIcon icon={qrCode} className='absolute top-0 right-0 p-3 bg-primary border-round-xl' onClick={slideToQr}/>
                                     </SwiperSlide>
                                     <SwiperSlide>
                                         <QrCode ticketId={event.ticketId} />
