@@ -51,9 +51,9 @@ const Login: React.FC = () => {
                         </div>
                     : null}
 
-                    <IonInput label='Adresse e-mail' labelPlacement='floating' type='email' fill='outline' placeholder='Adresse e-mail' className={invalid ? 'ion-invalid ion-touched' : ''} value={email} onIonInput={(e) => setEmail(e.detail.value || '')}/>
+                    <IonInput label='Adresse e-mail' labelPlacement='floating' type='email' fill='outline' placeholder='Adresse e-mail' className={`custom${invalid ? 'ion-invalid ion-touched' : ''}`} value={email} onIonInput={(e) => setEmail(e.detail.value || '')}/>
                     <div className='flex flex-column'>
-                        <IonInput label='Mot de passe' labelPlacement='floating' type='password' fill='outline' placeholder='Mot de passe' className={invalid ? 'ion-invalid ion-touched' : ''} value={password} onIonInput={(e) => setPassword(e.detail.value || '')} />
+                        <IonInput label='Mot de passe' labelPlacement='floating' type='password' fill='outline' placeholder='Mot de passe' className={`custom${invalid ? 'ion-invalid ion-touched' : ''}`} value={password} onIonInput={(e) => setPassword(e.detail.value || '')} />
                         <IonButton fill='clear' className='ml-auto'>
                             <span className='underline text-xs text-initial'>Mot de passe oublié ?</span>
                         </IonButton>

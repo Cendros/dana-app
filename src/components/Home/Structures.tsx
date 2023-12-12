@@ -2,7 +2,7 @@ import React from 'react';
 import Loading from '../Loading';
 import useStructures from '../../hooks/useStructures';
 import Structure from '../Check/Structure/Structure';
-import { StructureMinType } from '../../types/structure';
+import { StructureType } from '../../types/structure';
 
 const Structures: React.FC = () => {
     const structures = useStructures();
@@ -14,7 +14,7 @@ const Structures: React.FC = () => {
                     <h2 className='align-self-start font-bold'>Les structures</h2>
                     { structures.length ?
                         <div className='grid'>
-                            { structures.map(({ structure }: StructureMinType, i) => (
+                            { structures.map((structure: StructureType, i) => (
                                 <div key={i} className='col-6'>
                                     <Structure structure={structure} />
                                 </div>

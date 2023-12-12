@@ -32,6 +32,16 @@ export const formatDateEventDetail = (date: string) => {
     return format(date, options);
 }
 
+export const formatDateOnly = (date: string) => {
+    const options = {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+    } as const;
+
+    return format(date, options);
+}
+
 export const formatDateTicket = (date: string) => {
     const options = {
         year: "2-digit",

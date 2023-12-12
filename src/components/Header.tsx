@@ -7,7 +7,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ left }) => {
     return (
-        <IonHeader translucent className='ion-no-border'>
+        <IonHeader translucent className='ion-no-border pb-2'>
             <IonToolbar className='relative'>
                 { left ?
                     <IonButtons slot='start'>

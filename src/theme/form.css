@@ -1,9 +1,9 @@
-.input-fill-outline.sc-ion-input-md-h {
-    --border-color: var(--ion-color-primary);
-    --border-width: 2px;
-    --border-radius: var(--dana-border-radius);
+ion-input.custom {
+    border: solid 2px  #331863;
+    border-radius: 16px;
+    padding: 0 10px;
 }
 
 ion-button {
-    --border-radius: var(--dana-border-radius);
+    --border-radius: 16px;
 }

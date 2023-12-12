@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { modalProps } from '../../../types/components';
-import { IonButton, IonContent, IonIcon, IonImg, IonPage, useIonAlert } from '@ionic/react';
+import { IonButton, IonContent, IonIcon, IonImg, IonPage, useIonAlert, useIonModal } from '@ionic/react';
 import { arrowBack, qrCode } from 'ionicons/icons';
 import Header from '../../Header';
 import { useAtom, useAtomValue } from 'jotai/react';
 import { selectedEventAtom } from '../../../atoms/event';
 import Loading from '../../Loading';
 import { ASSETS_URL } from '../../../consts/api';
-import { formatDateEventDetail } from '../../../utils/date';
+import { formatDateEventDetail, formatDateOnly } from '../../../utils/date';
 import ConfirmDialog from '../../ConfirmDialog';
 import { OverlayEventDetail } from '@ionic/react/dist/types/components/react-component-lib/interfaces';
 import { bookEvent } from '../../../services/event';
@@ -16,6 +16,8 @@ import { balanceAtom } from '../../../atoms/user';
 import QrCode from '../../QrCode';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper/types';
+import useStructure from '../../../hooks/useStructure';
+import DetailsStructure from '../Structure/Details';
 
 type DetailsProps = {
     showQr?: boolean
@@ -34,6 +36,21 @@ const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
     const [tickets, setTickets] = useAtom(ticketsAtom);
 
     const [presentAlert] = useIonAlert();
+
+    const { setStructure } = useStructure();
+
+    const DetailsStructureModal = ({ onDismiss }: { onDismiss: () => void }) => (
+        <DetailsStructure dismiss={onDismiss} />
+    )
+
+    const [presentModal, dismissModal] = useIonModal(DetailsStructureModal, {
+        onDismiss: () => dismissModal()
+    })
+
+    const structureInfos = (structureId: number) => {
+        setStructure(structureId);
+        presentModal();
+    }
 
     useEffect(() => {
         if (showQr && swiper && !swiper.destroyed)
@@ -109,7 +126,7 @@ const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
                                 </Swiper>
                             : 
                                 <>
-                                    <IonImg src={`${ASSETS_URL}/events/${event.image}`} className={`absolute w-full ${!event.ticketId ? 'black-gradient-bottom' : null} ${event.quantity === 0 ? 'filter-gray' : null}`} />
+                                    <IonImg src={`${ASSETS_URL}/events/${event.image}`} className={`absolute w-full h-full  img-cover ${!event.ticketId ? 'black-gradient-bottom' : null} ${event.quantity === 0 ? 'filter-gray' : null}`} />
                                     <div className='text-white z-1 text-lg flex flex-column align-self-end gap-3 mb-3 text-center'>
                                         <span className='font-bold text-xl'>Places restantes</span>
                                         <span className='font-bold text-5xl'>{event.quantity}</span>
@@ -117,17 +134,28 @@ const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
                                 </>
                             }
                         </div>
-                        <div className='flex flex-row justify-content-between mt-3'>
+                        <div className='flex flex-row justify-content-between align-items-center mt-3'>
                             { !event.ticketId ? <span className='font-bold text-xl'>{event.value} €</span> : null }
-                            <span className='font-bold text-xl'>{formatDateEventDetail(event.date)}</span>
+                            { event.date ?
+                                <>
+                                    { event.dateExpiration ?
+                                        <div className='flex flex-column gap-2'>
+                                            <span className='font-bold text-xl'>Du {formatDateOnly(event.date)}</span>
+                                            <span className='font-bold text-xl'>au {formatDateOnly(event.dateExpiration)}</span>
+                                        </div>
+                                    :
+                                        <span className='font-bold text-xl'>{formatDateEventDetail(event.date)}</span>
+                                    }
+                                </>
+                            : null }
                         </div>
                         { !event.ticketId ?
                             <>
                                 <IonButton className='flex mt-3 text-initial' onClick={() => setOpen(true)}>Réserver ma place</IonButton>
-                                <p>{event.description}</p>
                             </>
                         : null}
-                        <IonButton className='flex mt-3 text-initial' fill='outline'>S&apos;y rendre</IonButton>
+                        <IonButton className='flex mt-3 text-initial' fill='outline' onClick={() => {structureInfos(event.structureId)}}>Voir la structure</IonButton>
+                        <p>{event.description}</p>
                     </>
                 :
                     <div className='flex justify-content-center h-full'>

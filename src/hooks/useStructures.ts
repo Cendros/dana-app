@@ -9,12 +9,12 @@ const useStructures = () => {
     const [structures, setStructures] = useAtom(structuresAtom);
 
     useEffect(() => {
-        fetchStructures();
+        if (!structures)
+            fetchStructures();
     }, []);
 
     const fetchStructures = async () => {
         const res = await getMyStructures(token);
-        
         setStructures(res.structures);
     }
 

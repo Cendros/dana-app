@@ -36,7 +36,6 @@ const NextEvents: React.FC = () => {
                         <Swiper
                             pagination
                             slidesPerView={2.3}
-                            loop
                             spaceBetween={10}
                         >
                             { events.map((event, i) => (

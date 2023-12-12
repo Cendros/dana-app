@@ -5,9 +5,8 @@ import { arrowBack} from 'ionicons/icons';
 import Header from '../../Header';
 import Loading from '../../Loading';
 import useStructure from '../../../hooks/useStructure';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { mapMarker } from '../../../consts/map';
+import Map from '../../Map';
 
 const Details: React.FC<modalProps> = ({ dismiss }) => {
     const { structure } = useStructure();
@@ -34,17 +33,15 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
                         </div>
 
                         { structure.longitude && structure.latitude ?
-                            <MapContainer center={[structure.longitude, structure.latitude]} zoom={14} scrollWheelZoom={false} className='aspect-1'>
-                                <TileLayer
-                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                />
-                                <Marker position={[structure.longitude, structure.latitude]} icon={mapMarker}>
-                                    <Popup>
-                                        {structure.name}
-                                    </Popup>
-                                </Marker>
-                            </MapContainer>
+                            <Map
+                                center={[structure.longitude, structure.latitude]}
+                                zoom={14}
+                                markers={[{
+                                    coords: [structure.longitude, structure.latitude],
+                                    popupText: structure.name
+                                }]}
+                                className='w-full aspect-1'
+                            />
                         : null }
                     </>
                 :
