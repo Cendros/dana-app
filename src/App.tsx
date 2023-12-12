@@ -22,6 +22,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import './theme/global.css';
 import './theme/form.css';
+import './theme/popup.css';
 
 import 'primeflex/primeflex.min.css'
 

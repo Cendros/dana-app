@@ -30,7 +30,7 @@ const QrCode: React.FC<QrCodeProps> = ({ ticketId }) => {
     return (
         <>
             { qrcode ?
-                <div className='w-full p-2'>
+                <div className='w-full'>
                     <QRCode
                         value={qrcode}
                         style={{ height: "auto", maxWidth: "100%", width: "100%" }}

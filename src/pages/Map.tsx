@@ -31,7 +31,7 @@ const Map: React.FC = () => {
             <Header />
             <IonContent fullscreen className='bg-light'>
                 { show ?
-                    <MapView center={[49.18792094535124, -0.3648198070680444]} zoom={12} className='w-full h-full' markers={markers} />
+                    <MapView center={[49.23077763216166, -0.3315435963674239]} zoom={11} className='w-full h-full' markers={markers} />
                 : <Loading text='Chargement de la carte' /> }
             </IonContent>
         </IonPage>

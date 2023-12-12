@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { modalProps } from '../../../types/components';
 import { IonButton, IonContent, IonIcon, IonImg, IonPage, useIonAlert, useIonModal } from '@ionic/react';
-import { arrowBack, qrCode } from 'ionicons/icons';
+import { arrowBack, locationOutline } from 'ionicons/icons';
 import Header from '../../Header';
 import { useAtom, useAtomValue } from 'jotai/react';
 import { selectedEventAtom } from '../../../atoms/event';
@@ -14,22 +14,15 @@ import { bookEvent } from '../../../services/event';
 import { ticketsAtom, tokenAtom } from '../../../atoms/globalStorage';
 import { balanceAtom } from '../../../atoms/user';
 import QrCode from '../../QrCode';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Swiper as SwiperType } from 'swiper/types';
 import useStructure from '../../../hooks/useStructure';
 import DetailsStructure from '../Structure/Details';
+import Popup from '../../Popup';
 
-type DetailsProps = {
-    showQr?: boolean
-}
-
-const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
+const Details: React.FC<modalProps> = ({ dismiss }) => {
     const [open, setOpen] = useState<boolean>(false);
 
-    const [swiper, setSwiper] = useState<SwiperType | undefined>(undefined);
-
     const token = useAtomValue(tokenAtom);
-    const event = useAtomValue(selectedEventAtom);
+    const event = useAtomValue(selectedEventAtom);    
 
     const [balance, setBalance] = useAtom(balanceAtom);
 
@@ -51,11 +44,6 @@ const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
         setStructure(structureId);
         presentModal();
     }
-
-    useEffect(() => {
-        if (showQr && swiper && !swiper.destroyed)
-            swiper.slideNext();
-    }, [swiper]);
 
     const left = (
         <IonButton fill='clear' onClick={dismiss}>
@@ -92,12 +80,7 @@ const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
         dismiss();
     }
 
-    const slideToQr = () => {
-        console.log(swiper);
-        
-        if (swiper)
-            swiper.slideNext();
-    }
+    const modalContent = event ? <QrCode ticketId={event.ticketId} /> : <></>;
 
     return (
         <IonPage>
@@ -108,23 +91,11 @@ const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
                         <h1 className='font-bold text-3xl'>{event.name}</h1>
                         <div className='flex align-items-center justify-content-center relative border-round-2xl overflow-hidden aspect-1'>
                             { event.ticketId ?
-                                <Swiper
-                                    loop
-                                    pagination
-                                    className='h-full'
-                                    onInit={(ev: SwiperType) => {
-                                        setSwiper(ev);
-                                    }}
-                                >
-                                    <SwiperSlide>
-                                        <IonImg src={`${ASSETS_URL}/events/${event.image}`} className='absolute' />
-                                        <IonIcon icon={qrCode} className='absolute top-0 right-0 p-3 bg-primary border-round-xl' onClick={slideToQr}/>
-                                    </SwiperSlide>
-                                    <SwiperSlide>
-                                        <QrCode ticketId={event.ticketId} />
-                                    </SwiperSlide>
-                                </Swiper>
-                            : 
+                                <>
+                                    <IonImg src={`${ASSETS_URL}/events/${event.image}`} className='absolute' />
+                                    <Popup content={modalContent} />
+                                </>
+                            :
                                 <>
                                     <IonImg src={`${ASSETS_URL}/events/${event.image}`} className={`absolute w-full h-full  img-cover ${!event.ticketId ? 'black-gradient-bottom' : null} ${event.quantity === 0 ? 'filter-gray' : null}`} />
                                     <div className='text-white z-1 text-lg flex flex-column align-self-end gap-3 mb-3 text-center'>
@@ -155,6 +126,10 @@ const Details: React.FC<modalProps & DetailsProps> = ({ dismiss, showQr }) => {
                             </>
                         : null}
                         <IonButton className='flex mt-3 text-initial' fill='outline' onClick={() => {structureInfos(event.structureId)}}>Voir la structure</IonButton>
+                        <div className='flex flex-row align-items-center gap-1 mt-3 pb-2 border-bottom-2 border-primary'>
+                            <IonIcon icon={locationOutline} className='w-2rem h-2rem'/>
+                            <span className='text-primary'>{event.structureName}</span>
+                        </div>
                         <p>{event.description}</p>
                     </>
                 :

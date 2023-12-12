@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { IonIcon, IonImg, useIonModal } from '@ionic/react'
+import React from 'react'
+import { IonImg, useIonModal } from '@ionic/react'
 import { ASSETS_URL } from '../../../consts/api'
 import { EventType } from '../../../types/event'
 import { formatDateTicket, formatHourTicket } from '../../../utils/date'
-import { qrCode } from 'ionicons/icons'
 import { useAtom } from 'jotai/react'
 import { selectedEventAtom } from '../../../atoms/event'
 import Details from './Details'
@@ -13,11 +12,10 @@ type TicketProps = {
 }
 
 const Ticket: React.FC<TicketProps> = ({ ticket }) => {
-    const [showQr, setShowQr] = useState<boolean>(false);
     const [, setSelectedEvent] = useAtom(selectedEventAtom);
 
     const DetailsModal = ({ onDismiss }: { onDismiss: () => void }) => (
-        <Details dismiss={onDismiss} showQr={showQr} />
+        <Details dismiss={onDismiss} />
     )
 
     const [presentModal, dismissModal] = useIonModal(DetailsModal, {
@@ -40,12 +38,9 @@ const Ticket: React.FC<TicketProps> = ({ ticket }) => {
                         <span className='font-bold'>{ticket.name}</span>
                         <span className='text-sm'>{ticket.structureName}</span>
                     </div>
-                    <div className='flex flex-column justify-content-between align-items-end'>
-                        <IonIcon icon={qrCode} onClick={() => setShowQr(true)} />
-                        <div className='flex flex-column gap-2'>
-                            <span className='text-sm'>{formatDateTicket(ticket.date)}</span>
-                            <span className='text-sm'>{formatHourTicket(ticket.date)}</span>
-                        </div>
+                    <div className='flex flex-column gap-2 align-self-end'>
+                        <span className='text-sm'>{formatDateTicket(ticket.date)}</span>
+                        <span className='text-sm'>{formatHourTicket(ticket.date)}</span>
                     </div>
                 </div>
             </div>
