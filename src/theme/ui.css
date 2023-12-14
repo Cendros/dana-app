@@ -1,0 +1,24 @@
+.gradient-dana {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40rem;
+    height: 45rem;
+    background-color: #f0f;
+    z-index: 1;
+    rotate: 47.819deg;
+    transform: translate(10%, 40%);
+    background: linear-gradient(330deg, #331863 13.02%, transparent 72.24%);
+}
+
+.background-dana {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transform: translateX(50%);
+    object-position: 0;
+    opacity: .1;
+}

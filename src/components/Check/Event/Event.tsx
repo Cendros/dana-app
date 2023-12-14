@@ -9,8 +9,6 @@ type EventProps = {
 }
 
 const Event: React.FC<EventProps> = ({ event }) => {
-    console.log(event);
-    
     return (
         <div className='w-full my-2 relative overflow-hidden'>
             <div className='flex align-items-center justify-content-center relative border-round-2xl overflow-hidden aspect-1'>
@@ -22,7 +20,7 @@ const Event: React.FC<EventProps> = ({ event }) => {
                 </div>
             </div>
             <div className='flex flex-column align-items-start gap-1 mt-1 text-sm'>
-                <span className='font-bold'>{event.name}</span>
+                <span className='font-bold text-left'>{event.name}</span>
                 <span>{formatDateEventNumeric(event.date)}</span>
             </div>
         </div>

@@ -10,7 +10,7 @@ import { selectedEventAtom } from '../../atoms/event';
 import { EventType } from '../../types/event';
 
 const NextEvents: React.FC = () => {
-    const events = useEvents();
+    const { events } = useEvents();
 
     const [, setSelectedEvent] = useAtom(selectedEventAtom);
 

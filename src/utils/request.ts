@@ -4,7 +4,7 @@ export type RequestParams = {
     route: string
     method: MethodType,
     body?: Record<string, string | number>
-    token?: string | undefined
+    token?: string | undefined | null
 }
 
 export const request = async ({ route, method, body, token }: RequestParams) => {

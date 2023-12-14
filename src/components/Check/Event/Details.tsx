@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { modalProps } from '../../../types/components';
-import { IonButton, IonContent, IonIcon, IonImg, IonPage, useIonAlert, useIonModal } from '@ionic/react';
+import { IonButton, IonContent, IonIcon, IonImg, IonPage, IonSpinner, useIonAlert, useIonModal } from '@ionic/react';
 import { arrowBack, locationOutline } from 'ionicons/icons';
 import Header from '../../Header';
 import { useAtom, useAtomValue } from 'jotai/react';
@@ -17,20 +17,22 @@ import QrCode from '../../QrCode';
 import useStructure from '../../../hooks/useStructure';
 import DetailsStructure from '../Structure/Details';
 import Popup from '../../Popup';
+import useEvents from '../../../hooks/useEvents';
 
 const Details: React.FC<modalProps> = ({ dismiss }) => {
     const [open, setOpen] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const token = useAtomValue(tokenAtom);
-    const event = useAtomValue(selectedEventAtom);    
+    const event = useAtomValue(selectedEventAtom);
 
     const [balance, setBalance] = useAtom(balanceAtom);
-
     const [tickets, setTickets] = useAtom(ticketsAtom);
 
     const [presentAlert] = useIonAlert();
 
     const { setStructure } = useStructure();
+    const { events, setEvents } = useEvents();
 
     const DetailsStructureModal = ({ onDismiss }: { onDismiss: () => void }) => (
         <DetailsStructure dismiss={onDismiss} />
@@ -41,6 +43,8 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
     })
 
     const structureInfos = (structureId: number) => {
+        if (loading)
+            return;
         setStructure(structureId);
         presentModal();
     }
@@ -53,11 +57,13 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
 
     const book = async (res: OverlayEventDetail) => {
         setOpen(false);
+        setLoading(true);
         
         if (res.data.action !== 'ok' || !event)
             return;
 
         const { ticket, error } = await bookEvent(token, event.id);
+        setLoading(false);
 
         if (error) {
             presentAlert({
@@ -76,6 +82,13 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
 
         setBalance((balance ?? 0) - event.value);
         setTickets([...tickets, ticket]);
+        
+        if (events) {
+            const _nextEvents = [...events];
+            const i = _nextEvents.findIndex(e => e.id == ticket.id);
+            _nextEvents[i].ticketId = ticket.ticketId;
+            setEvents(_nextEvents);
+        }
 
         dismiss();
     }
@@ -92,12 +105,12 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
                         <div className='flex align-items-center justify-content-center relative border-round-2xl overflow-hidden aspect-1'>
                             { event.ticketId ?
                                 <>
-                                    <IonImg src={`${ASSETS_URL}/events/${event.image}`} className='absolute' />
+                                    <IonImg src={`${ASSETS_URL}/events/${event.image}`} className='absolute w-full h-full img-cover' />
                                     <Popup content={modalContent} />
                                 </>
                             :
                                 <>
-                                    <IonImg src={`${ASSETS_URL}/events/${event.image}`} className={`absolute w-full h-full  img-cover ${!event.ticketId ? 'black-gradient-bottom' : null} ${event.quantity === 0 ? 'filter-gray' : null}`} />
+                                    <IonImg src={`${ASSETS_URL}/events/${event.image}`} className={`absolute w-full h-full img-cover ${!event.ticketId ? 'black-gradient-bottom' : null} ${event.quantity === 0 ? 'filter-gray' : null}`} />
                                     <div className='text-white z-1 text-lg flex flex-column align-self-end gap-3 mb-3 text-center'>
                                         <span className='font-bold text-xl'>Places restantes</span>
                                         <span className='font-bold text-5xl'>{event.quantity}</span>
@@ -122,7 +135,10 @@ const Details: React.FC<modalProps> = ({ dismiss }) => {
                         </div>
                         { !event.ticketId ?
                             <>
-                                <IonButton className='flex mt-3 text-initial' onClick={() => setOpen(true)}>Réserver ma place</IonButton>
+                                <IonButton className='flex mt-3 text-initial' onClick={() => setOpen(true)} disabled={loading}>
+                                    Réserver ma place
+                                    { loading ? <IonSpinner name='bubbles' slot='end' /> : null }
+                                </IonButton>
                             </>
                         : null}
                         <IonButton className='flex mt-3 text-initial' fill='outline' onClick={() => {structureInfos(event.structureId)}}>Voir la structure</IonButton>

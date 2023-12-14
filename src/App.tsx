@@ -23,6 +23,7 @@ import './theme/variables.css';
 import './theme/global.css';
 import './theme/form.css';
 import './theme/popup.css';
+import './theme/ui.css';
 
 import 'primeflex/primeflex.min.css'
 

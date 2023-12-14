@@ -9,7 +9,8 @@ const useEvents = () => {
     const [events, setEvents] = useAtom(eventsAtom);
 
     useEffect(() => {
-        fetchEvents();
+        if (!events)
+            fetchEvents();
     }, []);
 
     const fetchEvents = async () => {
@@ -18,7 +19,10 @@ const useEvents = () => {
         setEvents(res.events);
     }
 
-    return events;
+    return {
+        events,
+        setEvents
+    };
 }
 
 export default useEvents;
