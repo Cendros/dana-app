@@ -1,0 +1,10 @@
+
+{
+    "appId": "com.dana.check",
+    "appName": "dana",
+    "webDir": "build",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "react"
+}

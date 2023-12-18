@@ -1,5 +1,7 @@
 {
   "name": "cheques-dana",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

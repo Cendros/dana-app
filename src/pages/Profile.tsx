@@ -8,7 +8,7 @@ const Profile: React.FC = () => {
     const [token, setToken] = useAtom(tokenAtom);
 
     const logout = () => {
-        setToken(null);
+        setToken(undefined);
         location.href = '/login';
     }
 

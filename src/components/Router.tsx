@@ -13,13 +13,7 @@ import Profile from "../pages/Profile";
 
 const Router: React.FC = () => {
     const token = useAtomValue(tokenAtom);
-    
-    if (token === undefined)
-        return (<></>);
 
-    console.log(token);
-    
-        
     return (
         <IonReactRouter>
             { token ?
