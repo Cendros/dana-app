@@ -13,7 +13,7 @@ export const getMyTickets = async (token: RequestParams['token']) => {
     return await request({
         route: '/event/my',
         method: MethodType.GET,
-        token: token
+        token
     });
 }
 
@@ -21,7 +21,7 @@ export const bookEvent = async (token: RequestParams['token'], eventId: number) 
     return await request({
         route: '/event/book',
         method: MethodType.POST,
-        token: token,
+        token,
         body: { eventId: eventId }
     });
 }

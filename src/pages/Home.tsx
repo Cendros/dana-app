@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     return (
         <IonPage>
             <Header />
-            <IonContent fullscreen className='bg-light ion-padding px-5'>
+            <IonContent fullscreen className='bg-light ion-padding'>
                 <div className='flex flex-column align-items-center'>
                     <Solde />
                 </div>
