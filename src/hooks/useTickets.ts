@@ -8,13 +8,11 @@ const useTickets = () => {
     const [tickets, setTickets] = useAtom(ticketsAtom);
 
     useEffect(() => {
-        console.log('fetch');
         fetchTickets();
     }, []);
 
     const fetchTickets = async () => {
         const res = await getMyTickets(token);
-        console.log(res);
         
         setTickets(res);
     }

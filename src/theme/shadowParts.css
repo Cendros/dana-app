@@ -1,0 +1,3 @@
+.overflow-hidden::part(scroll) {
+    overflow: hidden;
+}
