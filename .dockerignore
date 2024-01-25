@@ -1,0 +1,15 @@
+.gitignore
+.dockerignore
+.idea
+.vscode
+.yarn
+.eslintrc.js
+.yarnrc.yml
+android
+ios
+
+node_modules/
+
+Dockerfile
+docker-compose.yaml
+README.md
