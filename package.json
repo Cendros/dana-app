@@ -1,6 +1,7 @@
 {
   "name": "dana-app",
   "version": "0.1.0",
+  "homepage": "dana-app",
   "private": true,
   "dependencies": {
     "@capacitor/android": "^5.5.0",
