@@ -24,7 +24,7 @@ const Router: React.FC = () => {
                     <Route exact path="/tickets" render={() => <Tickets />} />
                     <Route exact path="/profile" render={() => <Profile />} />
                     <Route exact path="/">
-                        <Redirect to={token ? "/dana-app/home" : "/dana-app/login"} />
+                        <Redirect to={token ? "/home" : "/login"} />
                     </Route>
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom">
@@ -52,7 +52,7 @@ const Router: React.FC = () => {
                         <Login />
                     </Route>
                     <Route exact path="/">
-                        <Redirect to={"/dana-app/login"} />
+                        <Redirect to={"/login"} />
                     </Route>
                 </IonRouterOutlet>
             }
