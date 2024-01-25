@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "src/components/Check/Event/Details.tsx"  ]
+, "src/components/Check/Event/Details.tsx", "android/app/src/environments"  ]
 }

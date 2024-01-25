@@ -1,7 +1,7 @@
 
 {
     "appId": "com.dana.check",
-    "appName": "dana",
+    "appName": "Dana",
     "webDir": "build",
     "integrations": {
         "capacitor": {}
