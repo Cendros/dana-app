@@ -33,7 +33,7 @@ const Login: React.FC = () => {
         
         setToken(token);
         setSubmitting(false);
-        location.href = '/home';
+        location.href = '/dana-app/home';
     }
 
     return (
@@ -68,7 +68,7 @@ const Login: React.FC = () => {
                         <IonButton className='align-self-center w-10 mt-5' disabled={submitting} onClick={login}>Connexion</IonButton>
                     </div>
                 </div>
-                <img src="assets/background.png" className='background-dana'/>
+                <img src="dana-app/assets/background.png" className='background-dana'/>
             </IonContent>
         </IonPage>
     );

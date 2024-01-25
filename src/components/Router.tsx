@@ -15,7 +15,7 @@ const Router: React.FC = () => {
     const token = useAtomValue(tokenAtom);
 
     return (
-        <IonReactRouter>
+        <IonReactRouter basename="/dana-app">
             { token ?
                 <IonTabs>
                     <IonRouterOutlet>
@@ -24,7 +24,7 @@ const Router: React.FC = () => {
                     <Route exact path="/tickets" render={() => <Tickets />} />
                     <Route exact path="/profile" render={() => <Profile />} />
                     <Route exact path="/">
-                        <Redirect to={token ? "/home" : "/login"} />
+                        <Redirect to={token ? "/dana-app/home" : "/dana-app/login"} />
                     </Route>
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom">
@@ -52,7 +52,7 @@ const Router: React.FC = () => {
                         <Login />
                     </Route>
                     <Route exact path="/">
-                        <Redirect to={"/login"} />
+                        <Redirect to={"/dana-app/login"} />
                     </Route>
                 </IonRouterOutlet>
             }
