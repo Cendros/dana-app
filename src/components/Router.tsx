@@ -15,7 +15,7 @@ const Router: React.FC = () => {
     const token = useAtomValue(tokenAtom);
 
     return (
-        <IonReactRouter basename="/dana-app">
+        <IonReactRouter>
             { token ?
                 <IonTabs>
                     <IonRouterOutlet>

@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
 
     const logout = () => {
         setToken(undefined);
-        location.href = '/dana-app/login';
+        location.href = '/login';
     }
 
     const editProfile = async () => {

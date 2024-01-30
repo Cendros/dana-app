@@ -9,8 +9,7 @@
     "type": "react",
     "plugins": {
         "Keyboard": {
-            "resize": "none",
-            "resizeOnFullScreen": false
+            "resize": "native"
         }
     }
 }
